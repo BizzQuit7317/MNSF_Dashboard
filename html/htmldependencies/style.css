@@ -1,0 +1,71 @@
+html {
+  font-family: 'Segoe UI';
+  justify-content: center;
+  display: flex;
+  background-color: rgb(22, 37, 49);
+}
+
+.fillBack {
+  background-color: rgb(34, 48, 60);
+}
+
+table, th, td {
+  border: 1px solid;
+  border-collapse: collapse;
+  background-color: rgb(34, 48, 60);
+  color: rgb(234, 255, 253);
+  font-size: 16px;
+}
+
+th {
+  color: rgb(255, 255, 255);
+}
+
+th, td {
+  padding: 2px;
+}
+
+h3 {
+  color: rgb(255, 255, 255);
+}
+
+h2 {
+  color: rgb(255, 255, 255);
+  font-size: 22px;
+  background-color: rgb(34, 48, 60);
+  justify-content: center;
+  border-bottom: 1px rgba(255, 255, 255, 0.5) solid;
+}
+
+.first_row {
+  width: auto;
+  height: auto;
+  justify-content: center;
+  background-color: rgb(34, 48, 60);
+  text-align: center;
+}
+
+button {
+  cursor: grab;
+}
+
+.second_row,
+.third_row,
+.fourth_row {
+  width: auto;
+  height: auto;
+  background-color: rgb(34, 48, 60);
+  justify-content: center;
+  display: flex;
+  padding: 5px;
+  padding-bottom: 20px;
+}
+
+.balances,
+.coinAsset,
+.USDAsset {
+  display: inline-table;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+

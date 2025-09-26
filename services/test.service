@@ -1,0 +1,10 @@
+[Unit]
+Description=Collecting binance data
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /var/www/html/speedBlocks.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

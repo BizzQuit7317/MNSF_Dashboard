@@ -1,0 +1,80 @@
+<html>
+    <head>
+        <script src="../htmldependencies/brython.js"></script>
+        <script src="../htmldependencies/brython_stdlib.js"></script>
+        <link rel="stylesheet" href="../htmldependencies/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <meta http-equiv="refresh" content="120">
+    </head>
+    <body onload="brython()">
+        <div>
+            <h3 id="headerState"></h3>
+            <h3 id="updateTime">Update Time: </h3>
+        </div>
+        <div class="first_row">
+            <div class="navigation">
+                <a href="index.html"><button>Overview</button></a>
+                <a href="assets.html"><button>Assets</button></a>
+                <a href="positions.html"><button>Positions</button></a>
+                <a href="breakdown.html"><button>Breakdown</button></a>
+                <a href="leverage.html"><button>Leverage</button></a>
+                <a href="funding.html"><button>Funding</button></a>
+                <a href="currentFunding.html"><button>Current Funding</button></a>
+                <a href="report.html"><button>Report</button></a>
+                <a href="48h_reward.html"><button>Rewards48H</button></a>
+                <a href="spread.html"><button>Spread</button></a>
+		<a href="monthly_reward.php"><button>Month Start Rewards</button></a>
+		<a href="daily_calculation.php"><button>Daily Calculation</button></a>
+                <a href="http://55.56.101.27/hist.html"><button>Historic Funding</button></a>
+            </div>
+        </div>
+    <div class="fillBack">
+    <form class="searching" action="actions_page.php" method="GET">
+            <input type="text" placeholder="Search..." name="search_query">
+            <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+    </div>
+    <div class="fillBack">
+    <h2>Rewards</h2>
+    <div id="zero" class="second_row"></div>
+    </div>
+    <script type="text/python">
+    from browser import document, html
+    from browser.html import TABLE, TR, TH, TD
+    import tmp, rewards_values
+
+    document["updateTime"]<= tmp.time
+
+    def getHeaders(dic):
+            headers = []
+            for i in dic[0]:
+                    headers.append(i)
+            return headers
+
+    def getValues(dic):
+            all_values = []
+            for i in dic:
+                values = []
+                for j in i:
+                    values.append(i[j])
+                all_values.append(values)
+            return all_values
+
+    heads = getHeaders(rewards_values.rewards)
+    values = getValues(rewards_values.rewards)
+
+    tot_table2 = TABLE()
+    row = TR()
+    for line in heads:
+        row <= TH(line)
+        tot_table2 <= row
+    for line in values:
+        row = TR()
+        for value in line:
+            row <= TD(value)
+            tot_table2 <= row
+
+    document["zero"]<= tot_table2
+    </script>
+    </body>
+</html>

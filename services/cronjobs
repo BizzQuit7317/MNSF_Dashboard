@@ -1,0 +1,8 @@
+0 * * * * /usr/bin/python3 /home/ubuntu/control/transfer.py >> /home/ubuntu/logfile.log 2>&1
+0 * * * * /usr/bin/python3 /home/ubuntu/store_daily_monthly/main.py >> /home/ubuntu/store_daily_monthly/log.log 2>&1
+5 * * * * /usr/bin/python3 /home/ubuntu/control/read_db.py >> /home/ubuntu/logfile_read.log 2>&1
+30 23 * * * /usr/bin/python3 /home/ubuntu/transactions/main/get_daily.py
+*/5 * * * * /usr/bin/python3 /var/www/html/alert.py >> /var/www/html/alert_log.log 2>&1
+45 23 * * * /home/ubuntu/cleaning_service/cleaning/target/debug/cleaning >> /home/ubuntu/cleaning_service/cleaning.log 2>&1
+20 * * * * /usr/bin/python3 /home/ubuntu/db_adjust/main/adjust_rewards.py
+38 * * * * /usr/bin/python3 /home/ubuntu/daily_calc_snapshot/daily_calc_snapshot.py >> /home/ubuntu/daily_calc_snapshot/log.log 2>&1

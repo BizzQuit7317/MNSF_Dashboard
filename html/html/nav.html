@@ -1,0 +1,148 @@
+<html>
+    <head>
+        <script src="../htmldependencies/brython.js"></script>
+        <script src="../htmldependencies/brython_stdlib.js"></script>
+        <link rel="stylesheet" href="../htmldependencies/style.css">
+        <meta http-equiv="refresh" content="120">
+	<title>MNSF Dashboard</title>
+    </head>
+    <body onload="brython()">
+        <div>
+            <h3 id="headerState"></h3>
+            <h3 id="updateTime">Update Time: </h3>
+        </div>
+        <div class="first_row">
+            <div class="navigation">
+                <a href="index.html"><button>Overview</button></a>
+                <a href="assets.html"><button>Assets</button></a>
+                <a href="positions.html"><button>Positions</button></a>
+                <a href="breakdown.html"><button>Breakdown</button></a>
+                <a href="leverage.html"><button>Leverage</button></a>
+                <a href="funding.html"><button>Funding</button></a>
+                <a href="currentFunding.html"><button>Current Funding</button></a>
+                <a href="report.html"><button>Report</button></a>
+		<a href="test_page.php"><button>Rewards Cumulative</button></a>
+                <a href="spread.html"><button>Spread</button></a>
+                <a href="loans.php"><button>Loans</button></a>
+                <a href="nav.html"><button>GAV</button></a>
+		<a href="daily_cum.php"><button>24 Hour Report</button></a>
+		<a href="monthly_reward.php"><button>Monthly Report</button></a>
+		<a href="daily_calculation.php"><button>Daily Calculation</button></a>
+                <a href="http://52.56.101.27/hist.html"><button>Historic Funding</button></a>
+            </div>
+        </div>
+    <div class="fillBack">
+        <h2>GAV</h2>
+        <div id="two" class="third_row"></div>
+    </div>
+    <div class="fillBack">
+        <h2>Calculations</h2>
+        <div id="three" class="third_row"></div>
+    </div>
+    <script type="text/python">
+        from browser import document, html
+        from browser.html import TABLE, TR, TH, TD
+        import tmp, total
+        from datetime import date
+
+        document["updateTime"]<= tmp.time
+
+        def getHeaders(dic):
+            headers = []
+            for i in dic[0]:
+                    headers.append(i)
+            return headers
+
+        def getValues(dic):
+            all_values = []
+            for i in dic:
+                values = []
+                for j in i:
+                    values.append(i[j])
+                all_values.append(values)
+            return all_values
+
+        def gav():
+            testTable = TABLE()
+            row = TR()
+            OVER = '{:,.2f}'.format(total.over)
+            GAV = '{:,.2f}'.format(total.gavValue)
+            NAV = '{:,.2f}'.format(total.NAV)
+            BTC = '{:,.9f}'.format(total.BTC_gav)
+            ETH = '{:,.9f}'.format(total.ETH_gav)
+            BTC_gav = '{:,.2f}'.format(total.BTCpx_gav)
+            ETH_gav = '{:,.2f}'.format(total.ETHpx_gav)
+            monthly_cost = '{:,.2f}'.format(total.monthly_cost)
+            BTC_price = '{:,.2f}'.format(total.BTC_price_b)
+            ETH_price = '{:,.2f}'.format(total.ETH_price_b)
+            BPNL = '{:,.2f}'.format(total.bpnl)
+            EPNL = '{:,.2f}'.format(total.epnl)
+            row <= TH("GAV")
+            row <= TH("GAV - 1")
+            row <= TH("NAV - 1")
+            row <= TH("BTC")
+            row <= TH("ETH")
+            row <= TH("BTCpx - 1")
+            row <= TH("ETHpx - 1")
+            row <= TH("BTC price")
+            row <= TH("ETH price")
+            row <= TH("BTCpnl")
+            row <= TH("ETCpnl")
+            row <= TH("Monthly Cost")
+            testTable <= row
+            row = TR()
+            row <= TD(OVER)
+            row <= TD(GAV)
+            row <= TD(NAV)
+            row <= TD(BTC)
+            row <= TD(ETH)
+            row <= TD(BTC_gav)
+            row <= TD(ETH_gav)
+            row <= TD(BTC_price)
+            row <= TD(ETH_price)
+            row <= TD(BPNL)
+            row <= TD(EPNL)
+            row <= TD(monthly_cost)
+            testTable <= row
+
+            document["two"] <= testTable
+
+        def calculate():
+            table = TABLE()
+            PRC = '{:,.2f}'.format(total.prc)
+            MF = '{:,.2f}'.format(total.mf)
+            PF = '{:,.2f}'.format(total.pf)
+            N = '{:,.2f}'.format(total.n)
+            GM = '{:,.2f}'.format(total.gm)
+            NM = '{:,.4f}'.format(total.nm)
+            G_ = '{:,.4f}'.format(total.gavPercent)
+            ASD = '{:,.2f}'.format(total.avg)
+            row = TR()
+            row <= TH("NAV")
+            row <= TH("GAV MTD")
+            row <= TH("GAV %")
+            row <= TH("Mgmt fee")
+            row <= TH("Perf fee")
+            row <= TH("Cost")
+            row <= TH("NAV %")
+            row <= TH("Avg Staked Duration")
+            table <= row
+            row = TR()
+            row <= TD(N)
+            row <= TD(GM)
+            row <= TD(G_)
+            row <= TD(MF)
+            row <= TD(PF) 
+            row <= TD(PRC)
+            row <= TD(NM)
+            row <= TD(ASD)
+            table <= row
+
+            document["three"] <= table
+
+
+        gav()
+        calculate()
+    </script>
+    </body>
+</html>

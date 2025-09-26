@@ -1,0 +1,1 @@
+rewards = [ {'TIME': '2024-04-22 10:46:36', 'VENUE': 'POLKADOT', 'SYMBOL': 'KSM', 'TYPE': 'REWARD', 'SIZE': '0.02', 'EXCHANGE': 'FireBlocks', 'CUMULATIVE': '0.00'}, {'TIME': '2024-04-22 10:46:36', 'VENUE': 'POLKADOT', 'SYMBOL': 'KSM', 'TYPE': 'REWARD', 'SIZE': '0.00', 'EXCHANGE': 'FireBlocks_Cold', 'CUMULATIVE': '0.00'}]

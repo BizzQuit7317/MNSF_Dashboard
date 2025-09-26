@@ -1,0 +1,125 @@
+<html>
+    <head>
+        <script src="../htmldependencies/brython.js"></script>
+        <script src="../htmldependencies/brython_stdlib.js"></script>
+        <link rel="stylesheet" href="../htmldependencies/style.css">
+        <meta http-equiv="refresh" content="120">
+	<title>MNSF Dashboard</title>
+    </head>
+    <body onload="brython()">
+        <div>
+            <h3 id="headerState"></h3>
+            <h3 id="updateTime">Update Time: </h3>
+        </div>
+        <div class="first_row">
+            <div class="navigation">
+                <a href="index.html"><button>Overview</button></a>
+                <a href="assets.html"><button>Assets</button></a>
+                <a href="positions.html"><button>Positions</button></a>
+                <a href="breakdown.html"><button>Breakdown</button></a>
+                <a href="leverage.html"><button>Leverage</button></a>
+                <a href="funding.html"><button>Funding</button></a>
+                <a href="currentFunding.html"><button>Current Funding</button></a>
+                <a href="report.html"><button>Report</button></a>
+		<a href="test_page.php"><button>Rewards Cumulative</button></a>
+                <a href="spread.html"><button>Spread</button></a>
+                <a href="loans.php"><button>Loans</button></a>
+		<a href="nav.html"><button>GAV</button></a>
+		<a href="daily_cum.php"><button>24 Hour Report</button></a>
+		<a href="monthly_reward.php"><button>Monthly Report</button></a>
+		<a href="daily_calculation.php"><button>Daily Calculation</button></a>
+                <a href="http://52.56.101.27/hist.html"><button>Historic Funding</button></a>
+            </div>
+        </div>
+    <div class="fillBack">
+    <h2>Funding</h2>
+    <div>
+        <input type="text" id="inputText"></input>
+        <button onclick="filter()">Search</button>
+    </div>
+    <div id="one" class="second_row"></div>
+    </div>
+    <script>
+        function filter() {
+            var textValue = document.getElementById('inputText').value;
+            var table = document.getElementById('one');
+            var rows = table.getElementsByTagName('tr');
+
+            // Create an array to store rows that match the filter
+            var matchingRows = [];
+
+            for (var i = 1; i < rows.length; i++) {  // Start from 1 to skip the header row
+                var cells = rows[i].getElementsByTagName('td');
+                var coinCell = cells[0];  // Assuming the coin is in the first cell
+
+                // Check if the content of the first cell starts with the text from the input
+                if (coinCell.textContent.startsWith(textValue)) {
+                    matchingRows.push(cells);
+                }
+            }
+
+            if (matchingRows.length > 0) {
+                // Extract headers
+                var headers = Array.from(rows[0].getElementsByTagName('th')).map(function (header) {
+                    return header.textContent;
+                });
+
+                // Format the matching rows for display
+                var formattedRows = matchingRows.map(function (cells) {
+                    var formattedRow = {};
+                    Array.from(cells).forEach(function (cell, index) {
+                        formattedRow[headers[index]] = cell.textContent;
+                    });
+                    return formattedRow;
+                });
+
+                // Display the formatted matching rows in the console
+                console.table(formattedRows);
+
+                // Display an alert with the formatted matching rows
+                alert('Matching Rows:\n' + JSON.stringify(formattedRows, null, 2));
+            } else {
+                alert('No matching rows found.');
+            }
+        }
+    </script>
+    <!-- <div id="one" class="second_row"></div> -->
+    <script type="text/python">
+        from browser import document, html, ajax
+        from browser.html import TABLE, TR, TH, TD
+        import fundStore, tmp
+
+        document["updateTime"]<= tmp.time
+
+        def getHeaders(dic):
+                headers = []
+                for i in dic[0]:
+                        headers.append(i)
+                return headers
+
+        def getValues(dic):
+                all_values = []
+                for i in dic:
+                    values = []
+                    for j in i:
+                        values.append(i[j])
+                    all_values.append(values)
+                return all_values
+        tot_headers = getHeaders(fundStore.fundingFormat)
+        tot_values = getValues(fundStore.fundingFormat)
+
+        tot_table = TABLE()
+        row = TR()
+        for line in tot_headers:
+            row <= TH(line)
+            tot_table <= row
+        for line in tot_values:
+            row = TR()
+            for value in line:
+                row <= TD(value)
+                tot_table <= row
+
+        document["one"]<= tot_table
+    </script>
+    </body>
+</html>

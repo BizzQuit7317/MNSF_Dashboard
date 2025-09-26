@@ -1,0 +1,11 @@
+[Unit]
+Description=Collecting binance data
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /var/www/html/fireBlocksFunctions.py
+WorkingDirectory=/var/www/html
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
