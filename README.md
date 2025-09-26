@@ -3,9 +3,9 @@
 This repository is used for the backend of the MNSF_Dashboard. This dashboard uses multiple source including exchange apis, and direct calls to block chains to gather data. The **Monitor.py** file along with other **.py** files in that directory are used to aggregate and calculate new tables and values which are pushed to a file for permiated storage.
 This repo also contains all the running html, css, js and php files used to display the information on simple tables on web pages.
 
-- Page_URL: http://18.133.174.77/html/index.html
+- Page_URL: http://<host address>/html/index.html
 - On_Server_Path: /var/www/html
-- Test Server URL: http://18.133.199.76/html/index.html
+- Test Server URL: http://<host address>/html/index.html
 
 # Important info
 ON SERVER IF YOU GET STUCK AND CANT SEE TRACEBACK OR FIND WHERE AN ERROR IS PRINTING FROM JUST IMPORT THE SCRIPT BELOW AT THE TOP OF ANY PYTHON FILE AND IT WILL PRINT THE LOCATION EACH PRINT IS FROM
@@ -23,15 +23,15 @@ once you have the files please plce them into the following directory on the ser
 ```
 
 # AWS Information
-- Account: Atlantide Asset Management
-- Instance_ID: i-01208a7be732d8b2a
+- Account: 
+- Instance_ID: 
 - Instance_Name: MNSF_Dashboard
-- Instance_IP: 18.133.174.77
+- Instance_IP: 
 - Instance_Type: t3.xLarge
 
 # SSH details
-- Key_Name: webSever.pem
-- Host_Name: ec2-18-133-174-77.eu-west-2.compute.amazonaws.com
+- Key_Name: 
+- Host_Name: 
 - Port: 22
 - User_Name: ubuntu
 
