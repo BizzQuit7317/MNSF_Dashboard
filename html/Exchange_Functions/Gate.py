@@ -96,11 +96,22 @@ def gate_spot_balance(api_key, api_secret, exchange):
     except Exception as e:
         print(f"ERROR WITH GATE SPOT WALLET: {e}")
 
+def gate_earn_balance(api_key, api_secret, exchange):
+    try:
+        r = send_signed_request("/earn/staking/assets", api_key, api_secret)
+        earn_data = []
+        for i in r:
+            data = {"QTY":float(i["mortgage_amount"]), "Coin":i["mortgage_coin"], "USDValue":float(i["mortgage_amount"]) * float(current_price(i["mortgage_coin"])), "Contract":i["mortgage_coin"], "Exchange":exchange, "Account":"EARN"}
+            earn_data.append(data)
 
+        df = pd.DataFrame(earn_data)
+        return df
+    except:
+        return pd.DataFrame()
 
 def gate_total_balance(api_key, api_secret, exchange):
     try:
-        df = pd.concat([gate_spot_balance(api_key, api_secret, exchange), gate_swap_balance(api_key, api_secret, exchange)], axis=0)
+        df = pd.concat([gate_spot_balance(api_key, api_secret, exchange), gate_swap_balance(api_key, api_secret, exchange), gate_earn_balance(api_key, api_secret, exchange)], axis=0)
         #df = gate_spot_balance(api_key, api_secret, exchange)
     except:
         df = gate_swap_balance(api_key, api_secret, exchange)
